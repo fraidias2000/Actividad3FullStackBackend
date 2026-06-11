@@ -5,6 +5,8 @@ import com.relatosdepapel.users_service.dto.request.RefreshTokenRequest;
 import com.relatosdepapel.users_service.dto.request.TokenValidationRequest;
 import com.relatosdepapel.users_service.dto.response.LoginResponse;
 import com.relatosdepapel.users_service.dto.response.TokenValidationResponse;
+import com.relatosdepapel.users_service.dto.result.LoginResult;
+import com.relatosdepapel.users_service.dto.result.TokenValidationResult;
 import com.relatosdepapel.users_service.service.AuthService;
 import jakarta.validation.Valid;
 
@@ -23,7 +25,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
-        AuthService.LoginResult result = authService.login(
+        LoginResult result = authService.login(
                 request.email(),
                 request.password()
         );
@@ -35,7 +37,7 @@ public class AuthController {
     public ResponseEntity<TokenValidationResponse> validateToken(
             @Valid @RequestBody TokenValidationRequest request
     ) {
-        AuthService.TokenValidationResult result = authService.validateOpaqueToken(
+        TokenValidationResult result = authService.validateOpaqueToken(
                 request.accessToken()
         );
 
@@ -44,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponse> refresh(@Valid @RequestBody RefreshTokenRequest request) {
-        AuthService.LoginResult result = authService.refresh(
+        LoginResult result = authService.refresh(
                 request.refreshToken()
         );
 

@@ -1,0 +1,11 @@
+com\relatosdepapel\gateway\GatewayAndFiltersApplication.class
+com\relatosdepapel\gateway\config\MapperConfig.class
+com\relatosdepapel\gateway\decorator\PutRequestDecorator.class
+com\relatosdepapel\gateway\model\GatewayRequest.class
+com\relatosdepapel\gateway\utils\RequestBodyExtractor.class
+com\relatosdepapel\gateway\filter\RequestTranslationFilter.class
+com\relatosdepapel\gateway\decorator\GetRequestDecorator.class
+com\relatosdepapel\gateway\decorator\PatchRequestDecorator.class
+com\relatosdepapel\gateway\decorator\RequestDecoratorFactory.class
+com\relatosdepapel\gateway\decorator\DeleteRequestDecorator.class
+com\relatosdepapel\gateway\decorator\PostRequestDecorator.class

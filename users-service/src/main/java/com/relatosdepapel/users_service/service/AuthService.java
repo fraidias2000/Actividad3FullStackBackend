@@ -1,5 +1,7 @@
 package com.relatosdepapel.users_service.service;
 
+import com.relatosdepapel.users_service.dto.result.LoginResult;
+import com.relatosdepapel.users_service.dto.result.TokenValidationResult;
 import com.relatosdepapel.users_service.model.RefreshTokenEntity;
 import com.relatosdepapel.users_service.model.UserEntity;
 import com.relatosdepapel.users_service.repository.UserRepository;
@@ -110,23 +112,7 @@ public class AuthService {
         );
     }
 
-    public record LoginResult(
-            String accessToken,
-            String refreshToken,
-            Long userId,
-            String email,
-            String firstName,
-            String lastName,
-            List<String> roles
-    ) {
-    }
 
-    public record TokenValidationResult(
-            boolean valid,
-            String jwtToken,
-            Long userId,
-            String email,
-            List<String> roles
-    ) {
-    }
+
+
 }
