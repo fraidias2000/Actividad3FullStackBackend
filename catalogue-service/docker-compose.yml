@@ -1,0 +1,16 @@
+services:
+  catalogue-postgres:
+    image: postgres:16-alpine
+    container_name: catalogue-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: catalogue_db
+      POSTGRES_USER: catalogue_user
+      POSTGRES_PASSWORD: catalogue_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - catalogue_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  catalogue_postgres_data:
