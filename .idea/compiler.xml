@@ -10,7 +10,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="orders-service" />
-        <module name="comns-service" />
+        <module name="comms-service" />
         <module name="catalogue-service" />
         <module name="users-service" />
         <module name="gateway-service" />
@@ -26,7 +26,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="catalogue-service" options="-parameters" />
-      <module name="comns-service" options="-parameters" />
+      <module name="comms-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
       <module name="orders-service" options="-parameters" />

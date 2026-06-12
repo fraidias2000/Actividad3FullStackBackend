@@ -1,8 +1,8 @@
 package com.relatosdepapel.orders_service.service;
 
 import com.relatosdepapel.orders_service.client.CatalogueClient;
-import com.relatosdepapel.orders_service.dto.CatalogueBookResponse;
-import com.relatosdepapel.orders_service.dto.CreateOrderRequest;
+import com.relatosdepapel.orders_service.dto.response.CatalogueBookResponse;
+import com.relatosdepapel.orders_service.dto.request.CreateOrderRequest;
 import com.relatosdepapel.orders_service.exception.CatalogueServiceUnavailableException;
 import com.relatosdepapel.orders_service.exception.InvalidOrderException;
 import com.relatosdepapel.orders_service.model.Order;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +22,16 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final CatalogueClient catalogueClient;
-    public OrderService(OrderRepository orderRepository, CatalogueClient catalogueClient) {
+    private final EmailEventPublisher emailEventPublisher;
+
+    public OrderService(
+            OrderRepository orderRepository,
+            CatalogueClient catalogueClient,
+            EmailEventPublisher emailEventPublisher
+    ) {
         this.orderRepository = orderRepository;
-           this.catalogueClient = catalogueClient;
+        this.catalogueClient = catalogueClient;
+        this.emailEventPublisher = emailEventPublisher;
     }
 
     public Order findById(Long id) {
@@ -79,7 +85,15 @@ public class OrderService {
 
         order.setTotalAmount(totalAmount);
 
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+        // ENVIA EMAIL A TRAVES DE RABBITMQ DESPUÉS DE GUARDAR
+        emailEventPublisher.publishOrderCreatedEmail(
+                "test@relatosdepapel.com",
+                savedOrder.getId()
+        );
+
+        return savedOrder;
     }
 
     //AGRUPA LOS LIBROS POR ID

@@ -70,6 +70,7 @@ public class AuthService {
     }
 
     public TokenValidationResult validateOpaqueToken(String opaqueToken) {
+        //Busca el JWT con el token opaco
         String jwtToken = opaqueTokenService.findJwtByOpaqueToken(opaqueToken)
                 .orElseThrow(() -> new RuntimeException("Token opaco inválido"));
 
@@ -78,6 +79,7 @@ public class AuthService {
             throw new RuntimeException("JWT expirado o inválido");
         }
 
+        //Obtiene los claims
         String email = jwtService.extractEmail(jwtToken);
         Long userId = jwtService.extractUserId(jwtToken);
         List<String> roles = jwtService.extractRoles(jwtToken);
@@ -91,6 +93,7 @@ public class AuthService {
         );
     }
 
+    //Valida el refresh token, obtiene el usuario y genera un nuevo JWT y otro token opaco
     public LoginResult refresh(String refreshTokenValue) {
         RefreshTokenEntity refreshToken = refreshTokenService.validateRefreshToken(refreshTokenValue);
 

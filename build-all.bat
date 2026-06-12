@@ -33,6 +33,14 @@ if errorlevel 1 goto error
 cd ..
 
 echo ========================================
+echo Compilando comms-service
+echo ========================================
+cd comms-service
+call mvn clean package -DskipTests
+if errorlevel 1 goto error
+cd ..
+
+echo ========================================
 echo Todos los microservicios compilados correctamente
 echo ========================================
 pause

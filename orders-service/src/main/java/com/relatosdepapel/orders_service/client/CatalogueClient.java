@@ -1,12 +1,8 @@
 package com.relatosdepapel.orders_service.client;
 
-import com.relatosdepapel.orders_service.dto.CatalogueBookResponse;
-import com.relatosdepapel.orders_service.dto.CreateOrderRequest;
-import jakarta.validation.Valid;
+import com.relatosdepapel.orders_service.dto.response.CatalogueBookResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @FeignClient(name = "catalogue-service")
 public interface CatalogueClient {

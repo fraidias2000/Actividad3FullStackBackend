@@ -5,12 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16e88b7b-c6f9-4742-8baa-f0f06782178e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/result/LoginResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/result/TokenValidationResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/response/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/response/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/response/TokenValidationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/dto/response/TokenValidationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/controller/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/dto/event/EmailEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/dto/request/ChatMessageRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/dto/response/ChatMessageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/listener/EmailEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/service/ChatService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/service/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/service/GeminiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comms-service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/event/EmailEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/service/EmailEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/src/main/java/com/relatosdepapel/comns_service/ComnsServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/src/main/java/com/relatosdepapel/comms_service/ComnsServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/comns-service/src/test/java/com/relatosdepapel/comns_service/ComnsServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/comms-service/src/test/java/com/relatosdepapel/comms_service/ComnsServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/client/CatalogueClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/client/CatalogueClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/CatalogueBookResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/response/CatalogueBookResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/CreateOrderItemRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/request/CreateOrderItemRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/CreateOrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/dto/request/CreateOrderRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/java/com/relatosdepapel/orders_service/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/orders-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/service/OpaqueTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/relatosdepapel/users_service/service/OpaqueTokenService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +78,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true"

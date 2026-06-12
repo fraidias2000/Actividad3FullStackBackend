@@ -15,7 +15,7 @@
         <module>discovery-service</module>
         <module>gateway-service</module>
         <module>users-service</module>
-        <module>comns-service</module>
+        <module>comms-service</module>
     </modules>
 
 </project>

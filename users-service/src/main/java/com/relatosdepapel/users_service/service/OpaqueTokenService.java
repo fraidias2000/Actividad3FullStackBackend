@@ -22,6 +22,7 @@ public class OpaqueTokenService {
         this.redisTemplate = redisTemplate;
     }
 
+    //AQUI SE GUARDA LA RELACIÓN ENTRE EL TOKEN OPACO Y EL JWT EN REDIS
     public String createOpaqueToken(String jwtToken) {
         String opaqueToken = UUID.randomUUID().toString();
         String redisKey = buildRedisKey(opaqueToken);

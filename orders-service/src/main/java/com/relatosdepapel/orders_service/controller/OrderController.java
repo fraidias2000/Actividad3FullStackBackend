@@ -1,6 +1,6 @@
 package com.relatosdepapel.orders_service.controller;
 
-import com.relatosdepapel.orders_service.dto.CreateOrderRequest;
+import com.relatosdepapel.orders_service.dto.request.CreateOrderRequest;
 import com.relatosdepapel.orders_service.model.Order;
 import com.relatosdepapel.orders_service.service.OrderService;
 import jakarta.validation.Valid;

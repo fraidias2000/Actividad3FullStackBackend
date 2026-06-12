@@ -1,0 +1,11 @@
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\ComnsServiceApplication.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\config\RabbitMQConfig.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\config\WebSocketConfig.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\controller\ChatController.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\dto\event\EmailEvent.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\dto\request\ChatMessageRequest.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\dto\response\ChatMessageResponse.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\listener\EmailEventListener.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\service\ChatService.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\service\EmailService.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\comms-service\src\main\java\com\relatosdepapel\comms_service\service\GeminiService.java

@@ -26,6 +26,13 @@ echo Arrancando gateway-service
 echo ========================================
 start "gateway-service" cmd /k "cd /d %cd%\gateway-service && mvn spring-boot:run"
 
+timeout /t 5 /nobreak
+
+echo ========================================
+echo Arrancando comms-service
+echo ========================================
+start "comms-service" cmd /k "cd /d %cd%\comms-service && mvn spring-boot:run"
+
 echo ========================================
 echo Todos los microservicios se estan arrancando
 echo ========================================
