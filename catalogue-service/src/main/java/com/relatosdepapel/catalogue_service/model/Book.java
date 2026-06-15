@@ -60,4 +60,8 @@ public class Book {
     @DecimalMin(value = "0.0", inclusive = true, message = "El precio no puede ser negativo")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @NotNull(message = "La url del libro es obligatoria")
+    @Column(name = "url_image", nullable = false)
+    private String urlImage;
 }

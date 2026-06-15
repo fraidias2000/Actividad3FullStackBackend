@@ -89,7 +89,7 @@ public class OrderService {
 
         // ENVIA EMAIL A TRAVES DE RABBITMQ DESPUÉS DE GUARDAR
         emailEventPublisher.publishOrderCreatedEmail(
-                "test@relatosdepapel.com",
+                "fraidias27@gmail.com",
                 savedOrder.getId()
         );
 

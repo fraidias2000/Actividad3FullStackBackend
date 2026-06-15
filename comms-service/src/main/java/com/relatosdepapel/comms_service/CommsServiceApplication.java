@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableRabbit
 @SpringBootApplication
-public class ComnsServiceApplication {
+public class CommsServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ComnsServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CommsServiceApplication.class, args);
+    }
 
 }

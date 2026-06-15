@@ -55,6 +55,7 @@ public class BookService {
         existingBook.setVisible(updatedBook.getVisible());
         existingBook.setStock(updatedBook.getStock());
         existingBook.setPrice(updatedBook.getPrice());
+        existingBook.setUrlImage(updatedBook.getUrlImage());
 
         return bookRepository.save(existingBook);
     }
@@ -96,6 +97,9 @@ public class BookService {
 
         if (updatedBook.getPrice() != null) {
             existingBook.setPrice(updatedBook.getPrice());
+        }
+        if (updatedBook.getUrlImage() != null) {
+            existingBook.setUrlImage(updatedBook.getUrlImage());
         }
 
         return bookRepository.save(existingBook);

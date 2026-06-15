@@ -8,5 +8,6 @@ CREATE TABLE books (
     rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
     visible BOOLEAN NOT NULL DEFAULT TRUE,
     stock INTEGER NOT NULL CHECK (stock >= 0),
-    price NUMERIC(10, 2) NOT NULL CHECK (price >= 0)
+    price NUMERIC(10, 2) NOT NULL CHECK (price >= 0),
+    url_image VARCHAR(500) NOT NULL
 );
