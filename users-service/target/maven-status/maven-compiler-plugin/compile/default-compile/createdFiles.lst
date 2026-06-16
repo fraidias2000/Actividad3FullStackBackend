@@ -19,10 +19,10 @@ com\relatosdepapel\users_service\dto\request\RefreshTokenRequest.class
 com\relatosdepapel\users_service\repository\RefreshTokenRepository.class
 com\relatosdepapel\users_service\model\UserEntity$UserEntityBuilder.class
 com\relatosdepapel\users_service\controller\GlobalExceptionHandler.class
+com\relatosdepapel\users_service\dto\response\UserProfileResponse.class
 com\relatosdepapel\users_service\dto\request\TokenValidationRequest.class
 com\relatosdepapel\users_service\UsersServiceApplication.class
 com\relatosdepapel\users_service\service\JwtService.class
 com\relatosdepapel\users_service\model\RoleEntity$RoleEntityBuilder.class
 com\relatosdepapel\users_service\service\OpaqueTokenService.class
 com\relatosdepapel\users_service\dto\result\LoginResult.class
-com\relatosdepapel\users_service\controller\UserController$UserProfileResponse.class

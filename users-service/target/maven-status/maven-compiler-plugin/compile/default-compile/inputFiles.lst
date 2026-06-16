@@ -7,6 +7,7 @@ C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\m
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\request\TokenValidationRequest.java
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\response\LoginResponse.java
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\response\TokenValidationResponse.java
+C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\response\UserProfileResponse.java
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\result\LoginResult.java
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\dto\result\TokenValidationResult.java
 C:\Users\utiel\OneDrive\Escritorio\AC3\Backend\Act3Fullstack\users-service\src\main\java\com\relatosdepapel\users_service\model\RefreshTokenEntity.java

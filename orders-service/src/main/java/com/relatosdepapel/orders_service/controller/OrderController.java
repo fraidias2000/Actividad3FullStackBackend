@@ -22,8 +22,11 @@ public class OrderController {
     // Registrar una compra
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Order create(@Valid @RequestBody CreateOrderRequest order) {
-        return orderService.create(order);
+    public Order create(
+            @Valid @RequestBody CreateOrderRequest order,
+            @RequestHeader("accessToken") String accessToken
+    ) {
+        return orderService.create(order, accessToken);
     }
 
     // Obtener una orden por id

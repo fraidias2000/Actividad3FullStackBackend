@@ -29,9 +29,16 @@ start "gateway-service" cmd /k "cd /d %cd%\gateway-service && mvn spring-boot:ru
 timeout /t 5 /nobreak
 
 echo ========================================
+echo Arrancando users-service
+echo ========================================
+start "users-service" cmd /k "cd /d %cd%\users-service && mvn spring-boot:run"
+
+timeout /t 5 /nobreak
+
+echo ========================================
 echo Arrancando comms-service
 echo ========================================
-start "comms-service" cmd /k "cd /d %cd%\comms-service && mvn spring-boot:run"
+start "comms-service" cmd /k "cd /d "%cd%\comms-service" && set "MAIL_USERNAME=afraidias27@gmail.com" && set "MAIL_PASSWORD=ehmbbbgdrqxlsvba" && set "MAIL_FROM=afraidias27@gmail.com" && mvn spring-boot:run"
 
 echo ========================================
 echo Todos los microservicios se estan arrancando

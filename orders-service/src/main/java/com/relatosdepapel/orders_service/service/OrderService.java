@@ -11,7 +11,9 @@ import com.relatosdepapel.orders_service.repository.OrderRepository;
 import feign.FeignException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.relatosdepapel.orders_service.client.UsersClient;
+import com.relatosdepapel.orders_service.dto.response.UserProfileResponse;
+import org.springframework.util.StringUtils;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,15 +25,18 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CatalogueClient catalogueClient;
     private final EmailEventPublisher emailEventPublisher;
+    private final UsersClient usersClient;
 
     public OrderService(
             OrderRepository orderRepository,
             CatalogueClient catalogueClient,
-            EmailEventPublisher emailEventPublisher
+            EmailEventPublisher emailEventPublisher,
+            UsersClient usersClient
     ) {
         this.orderRepository = orderRepository;
         this.catalogueClient = catalogueClient;
         this.emailEventPublisher = emailEventPublisher;
+        this.usersClient = usersClient;
     }
 
     public Order findById(Long id) {
@@ -44,7 +49,8 @@ public class OrderService {
     }
 
     @Transactional
-    public Order create(CreateOrderRequest request) {
+    public Order create(CreateOrderRequest request, String accessToken) {
+        UserProfileResponse user = getAuthenticatedUser(accessToken);
         //AGRUPA LOS LIBROS POR ID
         Map<Long, Integer> requestedItems = groupQuantitiesByBookId(request);
 
@@ -87,13 +93,30 @@ public class OrderService {
 
         Order savedOrder = orderRepository.save(order);
 
-        // ENVIA EMAIL A TRAVES DE RABBITMQ DESPUÉS DE GUARDAR
+        // ENVIA EMAIL A TRAVES DE RABBITMQ DESPUÉS DE GUARDAR, PARA ELLO LLAMA A USER-SERVICE PARA OBTENER EL EMAIL
         emailEventPublisher.publishOrderCreatedEmail(
-                "fraidias27@gmail.com",
+                user.email(),
                 savedOrder.getId()
         );
 
         return savedOrder;
+    }
+
+    //OBTIENE EL USUARIO EN BASE A UN JWT
+    private UserProfileResponse getAuthenticatedUser(String accessToken) {
+        try {
+            UserProfileResponse user = usersClient.getMyProfile(accessToken);
+
+            if (user == null || user.id() == null || user.email() == null || user.email().isBlank()) {
+                throw new InvalidOrderException("No se ha podido obtener el usuario autenticado");
+            }
+
+            return user;
+        } catch (FeignException.Unauthorized | FeignException.Forbidden ex) {
+            throw new InvalidOrderException("Token inválido o usuario no autorizado");
+        } catch (FeignException ex) {
+            throw new InvalidOrderException("No se ha podido obtener el usuario desde users-service");
+        }
     }
 
     //AGRUPA LOS LIBROS POR ID

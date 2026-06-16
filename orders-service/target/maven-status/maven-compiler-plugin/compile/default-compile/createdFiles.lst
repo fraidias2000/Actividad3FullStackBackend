@@ -14,6 +14,8 @@ com\relatosdepapel\orders_service\OrdersServiceApplication.class
 com\relatosdepapel\orders_service\controller\OrderController.class
 com\relatosdepapel\orders_service\config\RabbitMQConfig.class
 com\relatosdepapel\orders_service\exception\InvalidOrderException.class
+com\relatosdepapel\orders_service\client\UsersClient.class
+com\relatosdepapel\orders_service\dto\response\UserProfileResponse.class
 com\relatosdepapel\orders_service\exception\GlobalExceptionHandler.class
 com\relatosdepapel\orders_service\model\OrderItem$OrderItemBuilder.class
 com\relatosdepapel\orders_service\dto\request\CreateOrderItemRequest.class

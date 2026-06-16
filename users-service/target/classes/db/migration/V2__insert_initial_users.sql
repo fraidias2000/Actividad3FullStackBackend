@@ -24,7 +24,7 @@ VALUES
         TRUE
     ),
     (
-        'cliente@relatosdepapel.com',
+        'afraidias27@gmail.com',
         '$2a$10$.yTw2J14EAoWLDf4zr/bOOxKADfjr5Q2BN1FxByNV09Go93T0qUAi',--contraseña admin123
         'Cliente',
         'Demo',
@@ -44,6 +44,6 @@ ON CONFLICT DO NOTHING;
 INSERT INTO user_roles (user_id, role_id)
 SELECT u.id, r.id
 FROM users u, roles r
-WHERE u.email = 'cliente@relatosdepapel.com'
+WHERE u.email = 'afraidias27@gmail.com'
   AND r.name = 'CUSTOMER'
 ON CONFLICT DO NOTHING;
