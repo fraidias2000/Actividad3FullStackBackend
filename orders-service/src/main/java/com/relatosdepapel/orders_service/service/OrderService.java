@@ -49,14 +49,14 @@ public class OrderService {
     }
 
     @Transactional
-    public Order create(CreateOrderRequest request, String accessToken) {
-        UserProfileResponse user = getAuthenticatedUser(accessToken);
+    public Order create(CreateOrderRequest request, String jwtToken) {
+        UserProfileResponse user = getAuthenticatedUser(jwtToken);
         //AGRUPA LOS LIBROS POR ID
         Map<Long, Integer> requestedItems = groupQuantitiesByBookId(request);
 
         //CREA LA CABECERA
         Order order = Order.builder()
-                .userId(request.userId())
+                .userId(String.valueOf(user.id()))
                 .status("CONFIRMED")
                 .totalAmount(BigDecimal.ZERO)
                 .build();
@@ -103,9 +103,9 @@ public class OrderService {
     }
 
     //OBTIENE EL USUARIO EN BASE A UN JWT
-    private UserProfileResponse getAuthenticatedUser(String accessToken) {
+    private UserProfileResponse getAuthenticatedUser(String jwtToken) {
         try {
-            UserProfileResponse user = usersClient.getMyProfile(accessToken);
+            UserProfileResponse user = usersClient.getMyProfile(jwtToken);
 
             if (user == null || user.id() == null || user.email() == null || user.email().isBlank()) {
                 throw new InvalidOrderException("No se ha podido obtener el usuario autenticado");

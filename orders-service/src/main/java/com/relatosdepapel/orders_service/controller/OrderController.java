@@ -24,9 +24,9 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public Order create(
             @Valid @RequestBody CreateOrderRequest order,
-            @RequestHeader("accessToken") String accessToken
+            @RequestHeader("accessToken") String jwtToken
     ) {
-        return orderService.create(order, accessToken);
+        return orderService.create(order, jwtToken);
     }
 
     // Obtener una orden por id
