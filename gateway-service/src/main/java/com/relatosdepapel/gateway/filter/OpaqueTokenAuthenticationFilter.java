@@ -29,6 +29,9 @@ public class OpaqueTokenAuthenticationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
+            return chain.filter(exchange);
+        }
         String path = exchange.getRequest().getURI().getPath();
 
         if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS || !requiresAuthentication(path)) {
