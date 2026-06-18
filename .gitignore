@@ -1,5 +1,21 @@
+# Java / Maven
+target/
+*.class
+
+# IDE
 .idea/
 *.iml
-target/
-node_modules/
+.classpath
+.project
+.settings/
+
+# Variables de entorno / secretos
 .env
+*.env
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,206 @@
+services:
+  catalogue-postgres:
+    image: postgres:16-alpine
+    container_name: catalogue-postgres
+    environment:
+      POSTGRES_DB: catalogue_db
+      POSTGRES_USER: catalogue_user
+      POSTGRES_PASSWORD: catalogue_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - catalogue_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U catalogue_user -d catalogue_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  orders-postgres:
+    image: postgres:16-alpine
+    container_name: orders-postgres
+    environment:
+      POSTGRES_DB: orders_db
+      POSTGRES_USER: orders_user
+      POSTGRES_PASSWORD: orders_pass
+    ports:
+      - "5434:5432"
+    volumes:
+      - orders_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U orders_user -d orders_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  users-postgres:
+    image: postgres:16-alpine
+    container_name: users-postgres
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: users_user
+      POSTGRES_PASSWORD: users_pass
+    ports:
+      - "5435:5432"
+    volumes:
+      - users_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U users_user -d users_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: users-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: comms-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  discovery-service:
+    build:
+      context: ./Act3Fullstack/discovery-service
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    environment:
+      PORT: 8761
+
+  catalogue-service:
+    build:
+      context: ./Act3Fullstack/catalogue-service
+    container_name: catalogue-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      catalogue-postgres:
+        condition: service_healthy
+      discovery-service:
+        condition: service_started
+    environment:
+      PORT: 8081
+      BD_CATALOGUE_URL: jdbc:postgresql://catalogue-postgres:5432/catalogue_db
+      BD_CATALOGUE_USERNAME: catalogue_user
+      BD_CATALOGUE_PASS: catalogue_pass
+      EUREKA_URL: http://discovery-service:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+
+  orders-service:
+    build:
+      context: ./Act3Fullstack/orders-service
+    container_name: orders-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      orders-postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      discovery-service:
+        condition: service_started
+    environment:
+      PORT: 8082
+      BD_ORDERS_URL: jdbc:postgresql://orders-postgres:5432/orders_db
+      BD_ORDERS_USERNAME: orders_user
+      BD_ORDERS_PASS: orders_pass
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+      EUREKA_URL: http://discovery-service:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+
+  users-service:
+    build:
+      context: ./Act3Fullstack/users-service
+    container_name: users-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      users-postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      discovery-service:
+        condition: service_started
+    environment:
+      PORT: 8083
+      BD_USERS_URL: jdbc:postgresql://users-postgres:5432/users_db
+      BD_USERS_USERNAME: users_user
+      BD_USERS_PASS: users_pass
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      EUREKA_URL: http://discovery-service:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      JWT_SECRET: relatosdepapel-users-service-secret-key-minimum-32-characters
+
+  comms-service:
+    build:
+      context: ./Act3Fullstack/comms-service
+    container_name: comms-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      discovery-service:
+        condition: service_started
+    environment:
+      PORT: 8084
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+      EUREKA_URL: http://discovery-service:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      APP_MAIL_FROM: ${MAIL_USERNAME:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+
+  gateway-service:
+    build:
+      context: ./Act3Fullstack/gateway-service
+    container_name: gateway-service
+    ports:
+      - "8762:8762"
+    depends_on:
+      discovery-service:
+        condition: service_started
+      users-service:
+        condition: service_started
+      catalogue-service:
+        condition: service_started
+      orders-service:
+        condition: service_started
+      comms-service:
+        condition: service_started
+    environment:
+      PORT: 8762
+      EUREKA_URL: http://discovery-service:8761/eureka
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+      HOSTNAME: gateway-service
+
+volumes:
+  catalogue_postgres_data:
+  orders_postgres_data:
+  users_postgres_data:
