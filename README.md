@@ -1,48 +1,12 @@
 # Actividad-2-Desarrollo-Web-Fullstack
 Desarrollar parte de la arquitectura de microservicios para el proyecto de una aplicación web para una empresa de venta de libros
 
-*Los archivos DDL y DML se encuentran en la ruta \src\main\resources\db\migration en los microservicios catalogue-service y orders-service
+*Los archivos DDL y DML se encuentran en la ruta \src\main\resources\db\migration en los microservicios catalogue-service, orders-service y users-service
+
+
+* Arrancar la aplicacion: Dentro de la carpeta donde esté el archivo "docker-compose.yml" ejecutar: docker compose up --build
 *Compilar todos los microservicios: Ejecutar build-all.bat
-*Arrancar todos los microservicios: Ejecutar run-all.bat
 *Eliminar contenedor docker: Dentro de la carpeta donde esté el archivo "docker-compose.yml" ejecutar: docker compose down -v
-------------------------------------------------------------
-Orden arrancar servicios 
-------------------------------------------------------------
-1º BDs de catalogue y orders
-2º discovery-service
-3º microservicios catalogue-services, orders-services y comms-service
-4º gateway-service
-
-------------------------------------------------------------
-Arrancar microservicios
-------------------------------------------------------------
-Arrancar microservicio discovery
-Dentro del discovery-service ejecutar:
-    1º Compilar aplicación sin test: mvn clean install -DskipTests
-    2º Arrancar aplicación backend: mvn spring-boot:run
-
-Arrancar microservicio gateway
-Dentro del gateway-service ejecutar:
-    1º Compilar aplicación sin test: mvn clean install -DskipTests
-    2º Arrancar aplicación backend: mvn spring-boot:run
-
-Arrancar microservicio catalogue:
-Dentro del catalogue-service ejecutar:
-    1º Arrancar BD: docker compose up -d
-    2º Compilar aplicación sin test: mvn clean install -DskipTests
-    3º Arrancar aplicación backend: mvn spring-boot:run
-
-
-Arrancar microservicio orders:
-Dentro de la carpeta orders-service ejecutar:
-    1º Arrancar BD: docker compose up -d
-    2º Compilar aplicación sin test: mvn clean install -DskipTests
-    3º Arrancar aplicación backend: mvn spring-boot:run
-
-Arrancar microservicio comns:
-Dentro de la carpeta comns-service ejecutar:
-    1º Arrancar RabbitMQTT(Usuario guest y contraseña guest): docker compose up -d rabbitmq
-	
 
 
 ------------------------------------------------------------
@@ -81,6 +45,31 @@ Base de datos orders:
       - subtotal NUMERIC(10,2)
 
 
+Base de datos users:
+   Tabla users 
+    - id BIGSERIAL 
+    - email VARCHAR(180) 
+    - password VARCHAR(255) 
+    - first_name VARCHAR(100)
+    - last_name VARCHAR(100)
+    - phone VARCHAR(30)
+
+
+   Tabla roles 
+    - id BIGSERIAL
+    - name VARCHAR(50) 
+    - description VARCHAR(255)
+
+
+   Tabla user_roles 
+    - user_id BIGINT 
+    - role_id BIGINT 
+
+
+   Tabla refresh_tokens
+    - id BIGSERIAL 
+    - user_id BIGINT
+    - token VARCHAR(255)
 
 ------------------------------------------------------------
 ENDPOINTS DISPONIBLES
@@ -202,6 +191,8 @@ Microservicio orders-service:
 
 	*Registrar una compra
 		POST http://localhost:8762/api/orders
+		Headers:
+		accessToken: "accessToken"
 		Body:
 			{
   			"targetMethod": "POST",
@@ -238,13 +229,37 @@ Microservicio orders-service:
 
 
 
+Microservicio users-service:
+------------------------------------------------------------
+
+	*Hacer login
+		POST http://localhost:8083/api/auth/login
+		Body:
+			{
+  				"email": "email",
+  				"password": "password"
+			}
+	
+	*Validar token
+		POST http://localhost:8083/api/auth/validate
+		Body:
+			{
+  				"accessToken": "accessToken"
+			}
+
+	*Obtener perfil usuario con token opaco
+		POST: http://localhost:8083/api/users/me
+		Headers: "accessToken": "998585e9-e7ac-4cf4-8cb0-1b8892a6151d"
+
+	* Renovar token
+		POST http://localhost:8083/api/auth/refresh
+		Body:
+			{
+  				"refreshToken": "refreshToken"
+			}
 
 
-
-
-
-
-
+		
 
 
 
